@@ -1,0 +1,33 @@
+<form [formGroup]="addForm" action="">
+
+  <div  class="form-floating mb-3">
+    <input formControlName="nom"
+      type="text"
+      class="form-control form-control-sm"
+      id="nom"
+      placeholder="Banane"
+      name="nom"
+      [ngClass]="{'is-invalid': submited && formElementvalue.nom.errors, 'is-valid': submited && !formElementvalue.nom.errors}"
+    />
+    <div class="invalid-feedback">Le nom doit contenir au moins 3 caractères!</div>
+    <label for="nom">Nom</label>
+  </div>
+
+  <div class="form-floating form">
+    <input formControlName="prix"
+      type="number"
+      class="form-control form-control-sm"
+      id="prix"
+      placeholder="100"
+      name="prix"
+      [ngClass]="{'is-invalid': submited && formElementvalue.prix.errors, 'is-valid': submited && !formElementvalue.prix.errors }"
+    />
+    <div class="invalid-feedback">Le prix doit être un chiffre!</div>
+    <label for="prix">Prix</label>
+  </div>
+
+</form>
+<div class="my-3 text-center">
+  <button (click)="resetForm()" class="btn btn-outline-danger me-3">Annuler  </button>
+  <button (click)="onSubmit()" class="btn btn-primary">Ajouter</button>
+</div>

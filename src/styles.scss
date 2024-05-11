@@ -1,1 +1,42 @@
 /* You can add global styles to this file, and also import other style files */
+
+body {
+  height: 100vh;
+  background-image: url('https://img.freepik.com/free-photo/beautiful-shot-tree-savanna-plains-with-blue-sky_181624-21992.jpg?t=st=1715454320~exp=1715457920~hmac=8999778a8c4adc5ce9e96fedc08cda0a3484462d721fb8aa0c6c72d62800ad3e&w=996');
+  background-position: center;
+  background-size: cover;
+
+  main {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .wrapper {
+      min-height: 70vh;
+      width:70vw;
+      border-radius: 12px;
+      background-color: rgba(14, 14, 14, 0.596);
+      backdrop-filter: blur(3px);
+      padding: 15px 10px;
+
+      table{
+        border-radius: 12px;
+        padding: 10px;
+      }
+
+      nav .ngx-pagination{
+        // background-color: red;
+        color: white;
+
+        .current{
+          background-color: #43ACD8;
+        }
+      }
+    }
+  }
+  app-product-list {
+    width: 100vw;
+  }
+}

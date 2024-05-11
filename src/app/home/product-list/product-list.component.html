@@ -1,0 +1,154 @@
+<main>
+  <div class="wrapper">
+    <div class="d-flex justify-content-center flex-column">
+      <div class="d-flex justify-content-between">
+        <div>
+          <!-- Button trigger modal -->
+          <button
+            type="button"
+            class="btn btn-sm mb-3 me-3"
+            data-bs-toggle="modal"
+            data-bs-target="#addProduct"
+          >
+            <i class="bx bx-plus fs-4 text-white"></i>
+          </button>
+          @if(elementToDelete.length>0){
+          <button
+            type="button"
+            class="btn btn-sm mb-3 me-3"
+            (click)="onDeleteSelected()"
+          >
+            <i class="bx bxs-trash-alt fs-5 text-danger"></i>
+          </button>
+          }
+        </div>
+        <div class="formm-group">
+          <input
+            class="form-control form-control-sm"
+            type="text"
+            placeholder="Rechercher"
+            [(ngModel)]="filterValue"
+            (input)="onFilter()"
+          />
+        </div>
+      </div>
+      <table class="table">
+        <thead>
+          <tr >
+            <!-- <th scope="col">#</th> -->
+            <th scope="col" class="bg-transparent text-white">
+              <input type="checkbox" (change)="selectAll($event)" />
+              Nom
+            </th>
+            <th scope="col" class="bg-transparent text-white">Prix</th>
+            <th scope="col" class="bg-transparent text-white">Action</th>
+          </tr>
+        </thead>
+        <tbody class="text-danger">
+          @if (list.length>0) {
+            @for (item of list | paginate: { itemsPerPage: 8, currentPage: p }; track $index) {
+              <tr>
+                <!-- <th scope="row">{{ item.id }}</th> -->
+                <td class="bg-transparent text-white">
+                  <input
+                    type="checkbox"
+                    name="produitCheckbox"
+                    id="produitCheckbox"
+                    [(ngModel)]="item.isSelected"
+                    #selectAllCheckbox
+                    (click)="onAddElementToDeleteList($event, item)"
+                  />
+                  {{ item.nom }}
+                </td>
+                <td class="bg-transparent text-white">{{ item.prix }}</td>
+                <td class="bg-transparent text-white">
+                  <i
+                    class="bx bxs-edit-alt me-3 text-white edit"
+                    data-bs-toggle="modal"
+                    data-bs-target="#editProduct"
+                    (click)="getItemToEdit(item)"
+                  ></i>
+                  <i
+                    class="bx bxs-trash-alt text-white delete"
+                    (click)="deleteProduct(item)"
+                  ></i>
+                </td>
+              </tr>
+            }
+          }@else {
+            <td colspan="3" class="text-center text-white">Pas de produit disponible</td>
+            }
+        </tbody>
+      </table>
+      <pagination-controls
+        (pageChange)="p = $event"
+        previousLabel="Précédent"
+        nextLabel="Suivant"
+      ></pagination-controls>
+    </div>
+  </div>
+</main>
+
+<!-- addModal -->
+<div
+  class="modal fade"
+  id="addProduct"
+  data-bs-backdrop="static"
+  data-bs-keyboard="false"
+  tabindex="-1"
+  aria-labelledby="addProduct"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="addProduct">Ajouter Produit</h1>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+          #closseAddModal
+        ></button>
+      </div>
+      <div class="modal-body">
+        <app-add-product (dataToSend)="afterAdd($event)" />
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- editModal -->
+<div
+  class="modal fade"
+  id="editProduct"
+  data-bs-backdrop="static"
+  data-bs-keyboard="false"
+  tabindex="-1"
+  aria-labelledby="editProduct"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="editProduct">Modifier Produit</h1>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+          #closeEditModal
+          (click)="closeModal()"
+        ></button>
+      </div>
+      <div class="modal-body">
+        @if (productToEdit) {
+        <app-update-product
+          (dataToSend)="afterEdit($event)"
+          [productToEdit]="productToEdit"
+        />
+        }
+      </div>
+    </div>
+  </div>
+</div>

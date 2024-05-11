@@ -1,0 +1,18 @@
+:host{
+  i{
+    cursor: pointer;
+  }
+
+  .edit{
+    transition: all ease 0.5s;
+  }
+  .edit:hover{
+    color: rgb(248, 186, 69) !important;
+  }
+  .delete{
+    transition: all ease 0.5s;
+  }
+  .delete:hover{
+    color: rgb(248, 69, 69) !important;
+  }
+}
