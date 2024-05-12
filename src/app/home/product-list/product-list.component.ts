@@ -93,12 +93,12 @@ export class ProductListComponent implements OnInit {
     const isChecked = event.target.checked;
 
     this.listProduct.forEach((item: any) => {
-      item.isSelected = isChecked
-      this.onCheckboxChange(isChecked, item)
+      item.isSelected = isChecked;
+      this.onCheckboxChange();
     });
   }
 
-  onCheckboxChange(event: any, item: any) {
+  onCheckboxChange() {
     const allSelected = this.listProduct.every((item: any) => item.isSelected);
     this.selectAllCheckbox.nativeElement.checked = allSelected;
 
