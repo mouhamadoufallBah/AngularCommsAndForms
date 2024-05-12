@@ -41,7 +41,6 @@ export class ProductListComponent implements OnInit {
       this.closeEditModal.nativeElement.click();
       this.listProduct;
       this.getAllProduct();
-
     }
   }
 
@@ -95,6 +94,8 @@ export class ProductListComponent implements OnInit {
     this.listProduct.forEach((item: any) => {
       item.isSelected = isChecked;
       this.onCheckboxChange();
+      console.log(item);
+
     });
   }
 
